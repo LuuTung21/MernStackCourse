@@ -1,38 +1,41 @@
-import { apiSlice } from "./apiSlice.js";
-const USERS_URL = "/api/users";
+import { apiSlice } from './apiSlice';
+const USERS_URL = '/api/users';
 
-export const usersApiSlice = apiSlice.injectEndpoints({
+export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        // This is used to connect to the user authenticate route in the backend side.
         login: builder.mutation({
             query: (data) => ({
                 url: `${USERS_URL}/auth`,
-                method: "POST",
-                body: data
-            })
-        }),
-        register: builder.mutation({
-            query: (data) => ({
-                url: `${USERS_URL}`,
-                method: "POST",
-                body: data
-            })
+                method: 'POST',
+                body: data,
+            }),
         }),
         logout: builder.mutation({
             query: () => ({
                 url: `${USERS_URL}/logout`,
-                method: "POST"
-            })
+                method: 'POST',
+            }),
+        }),
+        register: builder.mutation({
+            query: (data) => ({
+                url: `${USERS_URL}`,
+                method: 'POST',
+                body: data,
+            }),
         }),
         updateUser: builder.mutation({
-            query: () => ({
+            query: (data) => ({
                 url: `${USERS_URL}/profile`,
-                method: "PUT",
-                body: data
-            })
-        })
-    })
+                method: 'PUT',
+                body: data,
+            }),
+        }),
+    }),
 });
 
-// The useLoginMutation will point directly to the mutation within the login endpoint.
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useUpdateUserMutation } = usersApiSlice;
+export const {
+    useLoginMutation,
+    useLogoutMutation,
+    useRegisterMutation,
+    useUpdateUserMutation,
+} = userApiSlice;
